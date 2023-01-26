@@ -22,3 +22,18 @@ func TotalInCategory(payments []types.Payment, category types.Category) types.Mo
 
 	return total
 }
+
+func PeriodsDynamic(first map[types.Category]types.Money,
+	second map[types.Category]types.Money) map[types.Category]types.Money {
+	result := make(map[types.Category]types.Money)
+
+	for category, money := range first {
+		result[category] = second[category] - money
+	}
+
+	for category, money := range second {
+		result[category] = money - first[category]
+	}
+
+	return result
+}
